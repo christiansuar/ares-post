@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://b3c68j36hxiii"]
+[gd_scene load_steps=14 format=3 uid="uid://b3c68j36hxiii"]
 
 [ext_resource type="Script" path="res://Scenes/Cutscenes/intro.gd" id="1_foovp"]
 [ext_resource type="Texture2D" uid="uid://bh6ec7xgp61jh" path="res://Textures/SkyBox/panorama_image (3).png" id="1_lflb7"]
@@ -25,6 +25,31 @@ fog_density = 0.827
 fog_height = 1024.0
 fog_height_density = 0.128
 volumetric_fog_density = 0.698
+
+[sub_resource type="Animation" id="Animation_k4mgt"]
+resource_name = "Mission Brief"
+length = 60.0
+loop_mode = 1
+step = 1.0
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/SpaceShip")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 5.125, 1, 0, 0.25, 0, 10, 1, 0, 0, 0, 14.875, 1, 0, -0.25, 0, 20, 1, 0, 0, 0, 25.125, 1, 0, 0.25, 0, 30, 1, 0, 0, 0, 34.875, 1, 0, -0.25, 0, 40, 1, 0, 0, 0, 45, 1, 0, 0.25, 0, 50, 1, 0, 0, 0, 55, 1, 0, -0.25, 0, 60, 1, 0, 0, 0)
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WorldEnvironment:environment:sky_rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 60),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 6.28319, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_edy3s"]
 resource_name = "Mission Brief"
@@ -96,31 +121,6 @@ tracks/2/keys = {
 "values": [1.0]
 }
 
-[sub_resource type="Animation" id="Animation_k4mgt"]
-resource_name = "Mission Brief"
-length = 20.0
-loop_mode = 1
-step = 1.0
-tracks/0/type = "position_3d"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimationPlayer/SpaceShip")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 5.125, 1, 0, 0.25, 0, 10, 1, 0, 0, 0, 14.875, 1, 0, -0.25, 0, 20, 1, 0, 0, 0, 25.125, 1, 0, 0.25, 0, 30, 1, 0, 0, 0, 34.875, 1, 0, -0.25, 0, 40, 1, 0, 0, 0, 45, 1, 0, 0.25, 0, 50, 1, 0, 0, 0, 55, 1, 0, -0.25, 0, 60, 1, 0, 0, 0)
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("WorldEnvironment:environment:sky_rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 20),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, 6.28319, 0)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_cp5qg"]
 _data = {
 "Idle (main menu)": SubResource("Animation_k4mgt"),
@@ -128,15 +128,16 @@ _data = {
 "RESET": SubResource("Animation_nhgx5")
 }
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s7m5n"]
+
 [sub_resource type="LabelSettings" id="LabelSettings_cvulh"]
-font_size = 120
+font_size = 140
 font_color = Color(0.737022, 0.189016, 0.181146, 1)
 outline_size = 10
 outline_color = Color(0, 0, 0, 1)
 shadow_size = 0
 
 [node name="Intro Cutscene" type="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00409007, -0.00296617, 0.00209016)
 script = ExtResource("1_foovp")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
@@ -161,44 +162,71 @@ transform = Transform3D(-0.369747, 0.145348, 0.917693, 0, 0.987688, -0.156434, -
 
 [node name="mainmenu" type="Control" parent="."]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="mainmenu"]
 layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 92.0
-offset_top = 214.0
-offset_right = 239.0
-offset_bottom = 394.0
+anchors_preset = -1
+anchor_left = 0.02
+anchor_top = 0.369
+anchor_right = 0.241
+anchor_bottom = 0.883
+offset_left = -533.8
+offset_top = -79.76
+offset_right = -347.64
+offset_bottom = 214.68
 grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
 theme_override_constants/separation = 90
 
 [node name="Start" type="Button" parent="mainmenu/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_smjl0")
 theme_override_font_sizes/font_size = 30
+theme_override_styles/focus = SubResource("StyleBoxEmpty_s7m5n")
 text = "Start"
+
+[node name="Options" type="Button" parent="mainmenu/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_smjl0")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/focus = SubResource("StyleBoxEmpty_s7m5n")
+text = "Options
+"
 
 [node name="Quit" type="Button" parent="mainmenu/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_smjl0")
 theme_override_font_sizes/font_size = 30
+theme_override_styles/focus = SubResource("StyleBoxEmpty_s7m5n")
 text = "Quit
 "
 
 [node name="Label" type="Label" parent="mainmenu"]
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = 64.0
-offset_right = 1048.0
-offset_bottom = 145.0
+anchors_preset = -1
+anchor_left = 0.002
+anchor_top = 0.06
+anchor_right = 0.927
+anchor_bottom = 0.321
+offset_left = -554.08
+offset_top = -267.4
+offset_right = 556.92
+offset_bottom = -108.84
 grow_horizontal = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
 theme_override_fonts/font = ExtResource("4_smjl0")
 theme_override_font_sizes/font_size = 60
 text = "ARES POST"
@@ -206,4 +234,5 @@ label_settings = SubResource("LabelSettings_cvulh")
 horizontal_alignment = 1
 
 [connection signal="pressed" from="mainmenu/VBoxContainer/Start" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="mainmenu/VBoxContainer/Options" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="mainmenu/VBoxContainer/Quit" to="." method="_on_button_2_pressed"]
