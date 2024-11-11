@@ -1,0 +1,126 @@
+[gd_scene load_steps=10 format=3 uid="uid://b3c68j36hxiii"]
+
+[ext_resource type="Script" path="res://Scenes/Cutscenes/intro.gd" id="1_foovp"]
+[ext_resource type="Texture2D" uid="uid://bh6ec7xgp61jh" path="res://Textures/SkyBox/panorama_image (3).png" id="1_lflb7"]
+[ext_resource type="PackedScene" uid="uid://diwsvjp4fdar0" path="res://Models/space_ship.tscn" id="2_5epk5"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_dqeg7"]
+panorama = ExtResource("1_lflb7")
+filter = false
+energy_multiplier = 2.0
+
+[sub_resource type="Sky" id="Sky_m5fiu"]
+sky_material = SubResource("PanoramaSkyMaterial_dqeg7")
+process_mode = 1
+radiance_size = 4
+
+[sub_resource type="Environment" id="Environment_g5oxn"]
+background_mode = 2
+sky = SubResource("Sky_m5fiu")
+tonemap_mode = 1
+glow_enabled = true
+fog_light_energy = 16.0
+fog_density = 0.827
+fog_height = 1024.0
+fog_height_density = 0.128
+volumetric_fog_density = 0.698
+
+[sub_resource type="Animation" id="Animation_edy3s"]
+resource_name = "Mission Brief"
+length = 60.0
+step = 1.0
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/SpaceShip")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 5.125, 1, 0, 0.25, 0, 10, 1, 0, 0, 0, 14.875, 1, 0, -0.25, 0, 20, 1, 0, 0, 0, 25.125, 1, 0, 0.25, 0, 30, 1, 0, 0, 0, 34.875, 1, 0, -0.25, 0, 40, 1, 0, 0, 0, 45, 1, 0, 0.25, 0, 50, 1, 0, 0, 0, 55, 1, 0, -0.25, 0, 60, 1, 0, 0, 0)
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WorldEnvironment:environment:sky_rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 60),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 3.14159, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("WorldEnvironment:environment:tonemap_exposure")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 5, 55, 60),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 1.0, 1.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_nhgx5"]
+length = 0.001
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/SpaceShip")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0)
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WorldEnvironment:environment:sky_rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("WorldEnvironment:environment:tonemap_exposure")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cp5qg"]
+_data = {
+"Mission Brief": SubResource("Animation_edy3s"),
+"RESET": SubResource("Animation_nhgx5")
+}
+
+[node name="Intro Cutscene" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00409007, -0.00296617, 0.00209016)
+script = ExtResource("1_foovp")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.808897, -0.222334, 0.544291, -0.354339, -0.923084, 0.149536, 0.46918, -0.313822, -0.825461, 8.63329, 4.95935, 0)
+light_color = Color(0.941176, 0.972549, 1, 1)
+light_energy = 0.25
+directional_shadow_mode = 0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_g5oxn")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_cp5qg")
+}
+movie_quit_on_finish = true
+
+[node name="SpaceShip" parent="AnimationPlayer" instance=ExtResource("2_5epk5")]
+
+[node name="Camera3D" type="Camera3D" parent="AnimationPlayer"]
+transform = Transform3D(-0.369747, 0.145348, 0.917693, 0, 0.987688, -0.156434, -0.929133, -0.0578411, -0.365195, 8.398, 0.277, -4.748)

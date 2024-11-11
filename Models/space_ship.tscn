@@ -1,0 +1,109 @@
+[gd_scene load_steps=7 format=3 uid="uid://diwsvjp4fdar0"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qem60"]
+albedo_color = Color(1, 0.329412, 0.309804, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3yfwp"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wbed6"]
+cull_mode = 2
+albedo_color = Color(0.180392, 0.180392, 0.180392, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_awebd"]
+albedo_color = Color(0.180392, 0.180392, 0.180392, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uxn8m"]
+transparency = 1
+cull_mode = 1
+albedo_color = Color(0.172549, 0.517647, 0.815686, 0.827451)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mutcm"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.431373)
+emission_enabled = true
+emission = Color(0.882353, 0.803922, 0, 1)
+
+[node name="SpaceShip" type="Node3D"]
+
+[node name="Point" type="CSGCylinder3D" parent="."]
+transform = Transform3D(0.707107, 3.09086e-08, -0.707107, 0.707107, -3.09086e-08, 0.707107, 0, -1, -4.37114e-08, 0, 1, -4)
+radius = 1.414
+height = 3.0
+sides = 4
+cone = true
+material = SubResource("StandardMaterial3D_qem60")
+
+[node name="Body" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+size = Vector3(2, 2, 5)
+material = SubResource("StandardMaterial3D_3yfwp")
+
+[node name="Body2" type="CSGBox3D" parent="Body"]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
+operation = 2
+size = Vector3(2, 2, 5)
+material = SubResource("StandardMaterial3D_3yfwp")
+
+[node name="Frame" type="CSGBox3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9, 0, -1)
+size = Vector3(0.5, 1, 1)
+material = SubResource("StandardMaterial3D_wbed6")
+
+[node name="Hollow4Window" type="CSGBox3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9, 0, -1)
+operation = 2
+size = Vector3(0.6, 0.7, 0.7)
+material = SubResource("StandardMaterial3D_awebd")
+
+[node name="Window" type="CSGBox3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9, 0, -1)
+size = Vector3(0.69, 0.69, 0.69)
+material = SubResource("StandardMaterial3D_uxn8m")
+
+[node name="Frame2" type="CSGBox3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9, 0, -1)
+size = Vector3(0.5, 1, 1)
+material = SubResource("StandardMaterial3D_wbed6")
+
+[node name="Hollow4Window2" type="CSGBox3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9, 0, -1)
+operation = 2
+size = Vector3(0.6, 0.7, 0.7)
+material = SubResource("StandardMaterial3D_awebd")
+
+[node name="Window2" type="CSGBox3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9, 0, -1)
+size = Vector3(0.69, 0.69, 0.69)
+material = SubResource("StandardMaterial3D_uxn8m")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.09278e-07, 2.5, 1)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5299e-07, 3.5, 2)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.55671e-08, -1.5, 2)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.18557e-08, -0.5, 1)
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.14674, 1.00499, -1.40143)
+radius = 0.028
+height = 0.2
+material = SubResource("StandardMaterial3D_mutcm")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="CSGCylinder3D2"]
+transform = Transform3D(0.99989, 0.0148348, 0, -0.0148348, 0.99989, 0, 0, 0, 1, 0.0200847, -0.00498521, 0.373411)
+light_color = Color(0.839216, 0.854902, 0, 1)
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.15197, 1.00499, -1.40143)
+radius = 0.028
+height = 0.2
+material = SubResource("StandardMaterial3D_mutcm")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="CSGCylinder3D3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00783789, -0.00498521, 0.388607)
+light_color = Color(0.839216, 0.854902, 0, 1)
