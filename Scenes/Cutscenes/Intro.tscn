@@ -1,8 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://b3c68j36hxiii"]
+[gd_scene load_steps=20 format=3 uid="uid://b3c68j36hxiii"]
 
 [ext_resource type="Script" path="res://Scenes/Cutscenes/intro.gd" id="1_foovp"]
 [ext_resource type="Texture2D" uid="uid://bh6ec7xgp61jh" path="res://Textures/SkyBox/panorama_image (3).png" id="1_lflb7"]
 [ext_resource type="PackedScene" uid="uid://diwsvjp4fdar0" path="res://Models/space_ship.tscn" id="2_5epk5"]
+[ext_resource type="Material" uid="uid://16w5kij6tr74" path="res://Textures/Spaceships/new_standard_material_3d.tres" id="4_f63mc"]
 [ext_resource type="FontFile" uid="uid://cpe8jjixtgmjm" path="res://Fonts/ethnocentric/ethnocentric rg.otf" id="4_smjl0"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_dqeg7"]
@@ -61,7 +62,7 @@ tracks/0/enabled = true
 tracks/0/path = NodePath("AnimationPlayer/SpaceShip")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 5.125, 1, 0, 0.25, 0, 10, 1, 0, 0, 0, 14.875, 1, 0, -0.25, 0, 20, 1, 0, 0, 0, 25.125, 1, 0, 0.25, 0, 30, 1, 0, 0, 0, 34.875, 1, 0, -0.25, 0, 40, 1, 0, 0, 0, 45, 1, 0, 0.25, 0, 50, 1, 0, 0, 0, 55, 1, 0, -0.25, 0, 60, 1, 0, 0, 0)
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 5.125, 1, 0, 0.5, 0, 10, 1, 0, 0, 0, 14.6719, 1, 0, -0.5, 0, 20, 1, 0, 0, 0, 25.125, 1, 0, 0.5, 0, 30, 1, 0, 0, 0, 34.6719, 1, 0, -0.5, 0, 40, 1, 0, 0, 0, 45, 1, 0, 0.5, 0, 50, 1, 0, 0, 0, 54.7969, 1, 0, -0.5, 0, 60, 1, 0, 0, 0)
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
@@ -128,6 +129,23 @@ _data = {
 "RESET": SubResource("Animation_nhgx5")
 }
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_oi17d"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_305rg"]
+material = ExtResource("4_f63mc")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mqjoh"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gr2vw"]
+transparency = 1
+albedo_color = Color(0.941176, 0.627451, 0.580392, 0.603922)
+emission_enabled = true
+emission = Color(0.961747, 0.456102, 1.73271e-06, 1)
+emission_energy_multiplier = 4.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_6rra1"]
+material = SubResource("StandardMaterial3D_gr2vw")
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s7m5n"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_cvulh"]
@@ -156,6 +174,24 @@ libraries = {
 movie_quit_on_finish = true
 
 [node name="SpaceShip" parent="AnimationPlayer" instance=ExtResource("2_5epk5")]
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="AnimationPlayer/SpaceShip"]
+transform = Transform3D(-1.41421, -1.4924e-07, 1.41421, -1.41421, -6.18172e-08, -1.41421, 1.4924e-07, -2, -6.18172e-08, 0, 1, 3)
+lifetime = 2.0
+speed_scale = 4.0
+randomness = 1.0
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_oi17d")
+draw_pass_1 = SubResource("QuadMesh_305rg")
+
+[node name="GPUParticles3D2" type="GPUParticles3D" parent="AnimationPlayer/SpaceShip"]
+transform = Transform3D(1.41421, -2.56055e-08, 1.41421, -1.41421, -6.18172e-08, 1.41421, 2.56055e-08, -2, -6.18172e-08, 0, 1, 3)
+lifetime = 2.0
+speed_scale = 4.0
+randomness = 1.0
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_mqjoh")
+draw_pass_1 = SubResource("QuadMesh_6rra1")
 
 [node name="Camera3D" type="Camera3D" parent="AnimationPlayer"]
 transform = Transform3D(-0.369747, 0.145348, 0.917693, 0, 0.987688, -0.156434, -0.929133, -0.0578411, -0.365195, 8.398, 0.277, -4.748)
@@ -225,6 +261,6 @@ text = "ARES POST"
 label_settings = SubResource("LabelSettings_cvulh")
 horizontal_alignment = 1
 
-[connection signal="pressed" from="mainmenu/VBoxContainer/Start" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="mainmenu/VBoxContainer/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="mainmenu/VBoxContainer/Options" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="mainmenu/VBoxContainer/Quit" to="." method="_on_button_2_pressed"]
