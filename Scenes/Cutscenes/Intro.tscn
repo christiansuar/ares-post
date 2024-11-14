@@ -194,7 +194,8 @@ process_material = SubResource("ParticleProcessMaterial_mqjoh")
 draw_pass_1 = SubResource("QuadMesh_6rra1")
 
 [node name="Camera3D" type="Camera3D" parent="AnimationPlayer"]
-transform = Transform3D(-0.457098, 0.139135, 0.878466, 0, 0.987688, -0.156434, -0.889417, -0.0715058, -0.45147, 8.398, 0.277, -4.748)
+transform = Transform3D(-0.469472, 0.138123, 0.872077, 0, 0.987688, -0.156434, -0.882948, -0.0734415, -0.463691, 8.398, 0, -4.748)
+current = true
 
 [node name="mainmenu" type="Control" parent="."]
 layout_mode = 3
