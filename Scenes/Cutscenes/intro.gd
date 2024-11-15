@@ -39,4 +39,3 @@ func _on_start_pressed() -> void:
 		await get_tree().create_timer(.5).timeout
 		cam.rotation_degrees.y = 118
 		intro_player.play("Mission Brief")
-		print(cam.rotation.y)

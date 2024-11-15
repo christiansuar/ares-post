@@ -146,14 +146,14 @@ emission_energy_multiplier = 4.0
 [sub_resource type="QuadMesh" id="QuadMesh_6rra1"]
 material = SubResource("StandardMaterial3D_gr2vw")
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s7m5n"]
-
 [sub_resource type="LabelSettings" id="LabelSettings_cvulh"]
 font_size = 140
 font_color = Color(0.737022, 0.189016, 0.181146, 1)
 outline_size = 10
 outline_color = Color(0, 0, 0, 1)
 shadow_size = 0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s7m5n"]
 
 [node name="Intro Cutscene" type="Node3D"]
 script = ExtResource("1_foovp")
@@ -207,45 +207,6 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="mainmenu"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.056
-anchor_top = 0.296
-anchor_right = 0.225
-anchor_bottom = 0.79
-offset_left = -0.512001
-offset_top = 0.192001
-offset_right = -0.200012
-offset_bottom = 0.0799866
-grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 6
-theme_override_constants/separation = 90
-
-[node name="Start" type="Button" parent="mainmenu/VBoxContainer"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("4_smjl0")
-theme_override_font_sizes/font_size = 30
-theme_override_styles/focus = SubResource("StyleBoxEmpty_s7m5n")
-text = "Start"
-
-[node name="Options" type="Button" parent="mainmenu/VBoxContainer"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("4_smjl0")
-theme_override_font_sizes/font_size = 30
-theme_override_styles/focus = SubResource("StyleBoxEmpty_s7m5n")
-text = "Options
-"
-
-[node name="Quit" type="Button" parent="mainmenu/VBoxContainer"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("4_smjl0")
-theme_override_font_sizes/font_size = 30
-theme_override_styles/focus = SubResource("StyleBoxEmpty_s7m5n")
-text = "Quit
-"
-
 [node name="Label" type="Label" parent="mainmenu"]
 layout_mode = 1
 anchors_preset = -1
@@ -262,6 +223,43 @@ text = "ARES POST"
 label_settings = SubResource("LabelSettings_cvulh")
 horizontal_alignment = 1
 
-[connection signal="pressed" from="mainmenu/VBoxContainer/Start" to="." method="_on_start_pressed"]
-[connection signal="pressed" from="mainmenu/VBoxContainer/Options" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="mainmenu/VBoxContainer/Quit" to="." method="_on_button_2_pressed"]
+[node name="HBoxContainer" type="HBoxContainer" parent="mainmenu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.222
+anchor_top = 0.889
+anchor_right = 0.778
+anchor_bottom = 0.958
+offset_left = 0.255981
+offset_top = -0.0720215
+offset_right = -0.256042
+offset_bottom = 0.215942
+theme_override_constants/separation = 96
+alignment = 1
+
+[node name="Start" type="Button" parent="mainmenu/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_smjl0")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/focus = SubResource("StyleBoxEmpty_s7m5n")
+text = "Start"
+
+[node name="Options" type="Button" parent="mainmenu/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_smjl0")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/focus = SubResource("StyleBoxEmpty_s7m5n")
+text = "Options
+"
+
+[node name="Quit" type="Button" parent="mainmenu/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_smjl0")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/focus = SubResource("StyleBoxEmpty_s7m5n")
+text = "Quit
+"
+
+[connection signal="pressed" from="mainmenu/HBoxContainer/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="mainmenu/HBoxContainer/Options" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="mainmenu/HBoxContainer/Quit" to="." method="_on_button_2_pressed"]
