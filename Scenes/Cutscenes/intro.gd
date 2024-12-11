@@ -10,6 +10,9 @@ func _ready() -> void:
 	intro_player.play("Idle (main menu)")
 
 func _on_button_2_pressed() -> void:
+	$AnimationPlayer/SpaceShip.queue_free()
+	await get_tree().create_timer(.5).timeout
+	#add explosion here
 	get_tree().quit()
 
 
